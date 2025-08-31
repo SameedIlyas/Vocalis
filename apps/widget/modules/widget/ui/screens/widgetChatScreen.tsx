@@ -10,6 +10,9 @@ import { useThreadMessages, toUIMessages } from "@convex-dev/agent/react";
 import { Button } from "@workspace/ui/components/button";
 import { api } from "@workspace/backend/_generated/api";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useInfiniteScroll } from "@workspace/ui/hooks/useInfiniteScroll";
+import { InfiniteScrollTrigger } from "@workspace/ui/components/infiniteScrollTrigger";
+import { DicebearAvatar } from "@workspace/ui/components/dicebearAvatar";
 import {
     AIConversation,
     AIConversationContent,
@@ -76,6 +79,12 @@ export const WidgetChatScreen = () => {
         { initialNumItems: 10 }
     );
 
+    const { topElementRef, handleLoadMore, canLoadMore, isLoadingMore } = useInfiniteScroll({
+        status: messages.status,
+        loadMore: messages.loadMore,
+        loadSize: 10
+    });
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -120,6 +129,12 @@ export const WidgetChatScreen = () => {
             </WidgetHeader>
             <AIConversation>
                 <AIConversationContent>
+                    <InfiniteScrollTrigger 
+                        canLoadMore={canLoadMore}
+                        isLoadingMore={isLoadingMore}
+                        onLoadMore={handleLoadMore}
+                        ref={topElementRef}
+                    />
                     {toUIMessages(messages.results ?? [])?.map((message) => {
                         return (
                             <AIMessage
@@ -130,6 +145,13 @@ export const WidgetChatScreen = () => {
                                     <AIResponse>{message.text}</AIResponse>
                                 </AIMessageContent>
                                 {/** TODO: Add Avatar Component */}
+                                {message.role === "assistant" && (
+                                    <DicebearAvatar 
+                                        imageUrl="/logo.svg"
+                                        seed="assistant"
+                                        size={32}
+                                    />
+                                )}
                             </AIMessage>
                         )
                     })}

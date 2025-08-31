@@ -1,13 +1,14 @@
 "use client";
 
-import { useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 
 import { WidgetAuthScreen } from "../screens/widgetAuthScreen";
-import { screenAtom } from "../../atoms/widgetAtoms";
+import { organizationIdAtom, screenAtom } from "../../atoms/widgetAtoms";
 import { WidgetErrorScreen } from "../screens/widgetErrorScreen";
 import { WidgetLoadingScreen } from "../screens/widgetLoadingScreen";
 import { WidgetSelectionScreen } from "../screens/widgetSelectionScreen";
 import { WidgetChatScreen } from "../screens/widgetChatScreen";
+import { useEffect } from "react";
 
 interface Props {
     organizationId: string | null;
@@ -15,6 +16,13 @@ interface Props {
 
 export const WidgetView = ({ organizationId }: Props) => {
     const screen = useAtomValue(screenAtom);
+    const setOrganizationId = useSetAtom(organizationIdAtom);
+
+    useEffect(() => {
+        if (organizationId) {
+            setOrganizationId(organizationId);
+        }
+    }, [organizationId, setOrganizationId]);
 
     const screenComponents = {
         error: <WidgetErrorScreen />,

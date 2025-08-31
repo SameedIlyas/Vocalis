@@ -7,7 +7,9 @@ import { WidgetScreen } from "../types";
 import { CONTACT_SESSION_KEY } from "../constants";
 
 export const screenAtom = atom<WidgetScreen>("auth");
+
 export const organizationIdAtom = atom<string | null>(null);
+export const conversationIdAtom = atom<Id<"conversations"> | null>(null);
 
 // Organization scoped contact session atom
 export const contactSessionIdAtomFamily = atomFamily((organizationId: string) => atomWithStorage<Id<"contactSessions"> | null>(`${CONTACT_SESSION_KEY}_${organizationId}`, null))

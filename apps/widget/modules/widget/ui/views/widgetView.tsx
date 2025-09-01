@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
 
 import { WidgetAuthScreen } from "../screens/widgetAuthScreen";
@@ -8,7 +9,7 @@ import { WidgetErrorScreen } from "../screens/widgetErrorScreen";
 import { WidgetLoadingScreen } from "../screens/widgetLoadingScreen";
 import { WidgetSelectionScreen } from "../screens/widgetSelectionScreen";
 import { WidgetChatScreen } from "../screens/widgetChatScreen";
-import { useEffect } from "react";
+import { WidgetInboxScreen } from "../screens/widgetInboxScreen";
 
 interface Props {
     organizationId: string | null;
@@ -29,7 +30,7 @@ export const WidgetView = ({ organizationId }: Props) => {
         loading: <WidgetLoadingScreen organizationId={organizationId} />,
         auth: <WidgetAuthScreen />,
         voice: <p>TODO: Voice</p>,
-        inbox: <p>TODO: Inbox</p>,
+        inbox: <WidgetInboxScreen />,
         selection: <WidgetSelectionScreen />,
         chat: <WidgetChatScreen />,
         contact: <p>TODO: Contact</p>,

@@ -10,6 +10,7 @@ import { api } from "@workspace/backend/_generated/api";
 
 import { WidgetHeader } from "../components/widgetHeader";
 import { contactSessionIdAtomFamily, conversationIdAtom, errorMessageAtom, organizationIdAtom, screenAtom } from "../../atoms/widgetAtoms";
+import { WidgetFooter } from "../components/widgetFooter";
 
 export const WidgetSelectionScreen = () => {
     const setScreen = useSetAtom(screenAtom);
@@ -78,6 +79,7 @@ export const WidgetSelectionScreen = () => {
                     <ChevronRightIcon />
                 </Button>
             </div>
+            <WidgetFooter />
         </>
     )
 };

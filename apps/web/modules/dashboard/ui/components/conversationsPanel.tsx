@@ -120,7 +120,7 @@ export const ConversationsPanel = () => {
                         return (
                             <Link
                                 key={conversation._id}
-                                className={cn("realtive flex-cursor cursor-pointer items-start gap-3 border-b p-4 py-5 text-sm leading-tight hover:bg-accent hover:text-accent-foreground",
+                                className={cn("relative flex cursor-pointer items-start gap-3 border-b p-4 py-5 text-sm leading-tight hover:bg-accent hover:text-accent-foreground",
                                     pathname === `/conversations/${conversation._id}` &&
                                     "bg-accent text-accent-foreground"
                                 )}
@@ -191,7 +191,7 @@ export const SkeletonConversations = () => {
                         >
                             <Skeleton className="h-10 w-10 shrink-0 rounded-full" />
                             <div className="min-w-0 flex-1">
-                                <div className="felx w-full items-center gap-2">
+                                <div className="flex w-full items-center gap-2">
                                     <Skeleton className="h-4 w-24" />
                                     <Skeleton className="ml-auto h-3 w-12 shrink-0" />
                                 </div>
